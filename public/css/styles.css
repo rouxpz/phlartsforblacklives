@@ -1,0 +1,130 @@
+body {
+  font-family: 'Karla', sans-serif;
+  /* padding:25px; */
+  margin:0px;
+  background-color: black;
+  color:white;
+}
+
+p {
+  line-height: 1.4;
+}
+
+#header {
+  /* font-size: 50px; */
+  text-align: center;
+  padding-top:40px;
+  padding-bottom:60px;
+  background-color: #110918;
+}
+
+#names {
+  -webkit-column-count: 2;
+      -moz-column-count: 2;
+           column-count: 2;
+
+   -webkit-column-gap: 20px;
+      -moz-column-gap: 20px;
+           column-gap: 20px;
+}
+
+h1 {
+    font-size: 60px;
+    /* font-weight: 700; */
+}
+
+h2 {
+  font-size: 40px;
+  text-align: center;
+}
+
+h3 {
+  font-size: 30px;
+  text-align: center;
+  font-style: italic;
+}
+
+h4 {
+  font-size: 25px;
+  text-align:left;
+}
+
+#letter, #resources, #thankyou {
+  padding-left:10%;
+  padding-right:10%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+a {
+  color: #41ac77;
+}
+
+a:hover {
+  color:#f86eb3;
+  text-decoration: line-through;
+}
+
+.emphasized {
+  font-size:25px;
+  font-weight: 400;
+  font-style: italic;
+
+}
+
+#add-your-name {
+  width:50%;
+  padding-left:10%;
+  padding-right:10%;
+  margin: auto;
+  text-align: center;
+}
+
+.centered {
+  margin: auto;
+  text-align: center;
+  margin: 20px;
+}
+
+.label {
+  display:inline-block;
+  text-align: left;
+}
+
+.button {
+  background-color: #ab5ef8;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  border-radius: 28px;
+  margin: 5px;
+}
+
+.button:hover {
+  background-color: #2f7b55;
+  text-decoration: line-through;
+  cursor: pointer;
+}
+
+
+
+input[type=text] {
+  width:100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border-radius: 4px;
+  border: 1px solid;
+  font: 1em Arial, Helvetica, sans-serif;
+}
+
+input[type=submit] {
+  text-align:center;
+}
+
+.footer {
+  height:40px;
+}

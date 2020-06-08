@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Open Letter to Mayor Jim Kenney</title>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+
+  <body>
+    <div id="header">
+      <h1>PHILLY ARTS FOR BLACK LIVES</h1>
+      <a href="#add-your-name"><button type="button" name="button" class="button">ADD YOUR NAME TO THE LETTER</button></a>
+      <a href="/resources"><button type="button" name="button" class="button">RESOURCES ON POLICE ABOLITION</button></a>
+    </div>
+    <div id="letter">
+      <h2>AN OPEN LETTER TO MAYOR KENNEY<br>& CITY COUNCIL</h2>
+      <br>
+      <p><strong>June 08 2020<br>
+      To: Mayor James “Jim” Kenney<br>
+      Cc: City Council</strong></p>
+
+      <p>To Mayor Kenney and City Council members:</p>
+
+      <p>We write this letter on behalf of the arts and culture leaders of your city.</p>
+
+      <p>The Youth Arts and Self-Empowerment Project trains young adults with criminal justice histories to become arts leaders. YASP has a simple thought exercise in their curriculum that I’d like to share:</p>
+
+      <div class="emphasized"><p>Close your eyes. Imagine the word “safety.” What does it look like? </p></div>
+
+      <p>I doubt if anyone pictures a squadron of police officers in riot gear advancing on you and your neighbors. I doubt if anyone pictures helicopters and national guard tanks encroaching on your community. I doubt if anyone pictures a prison cell. George Floyd, Breonna Taylor, Tony McDade, Sandra Bland, Michael Brown, Tamir Rice, Eric Garner, Sean Bell, Amadou Diallo and thousands of other Black people, did not feel safe when they saw the police approaching them.</p>
+
+      <p>Today we are bearing witness to just one punctuation of the movement for Black lives. The police state is a system that was built to end Black lives after four centuries of enslaving them. But it was built, which means it can be dismantled. All of the obstacles to our collective and complete humanity, must be torn apart.</p>
+
+      <p>As arts leaders, it is incumbent upon us to find ways to be in service to the communities that we are part of. That is especially true of our Black constituents. We want to paint a picture of safety, not terror.  We have called upon all arts and culture leaders in Philadelphia to add their signatures of support and commit to their institutions divesting from the police. </p>
+
+      <p>In early May, we objected to your proposed city budget for the fiscal 2021 year, which reserved an irrational, continued investment in the police, under the auspices of “safety.”  Police violence against Black people historically and against peaceful protesters this past week specifically have revealed the extent to which the city’s police are over-militarized, violent and dangerous; how the people of Philadelphia are increasingly united in their disapproval of how the police operate; and how the timing of these budget hearings--during which organizations throughout the city and in different sectors are being defunded--have galvanized a moment when we say: enough is enough. A city needs more than a police force. A city needs services for its people. </p>
+
+      <p>Many of us had delicately suggested that the $649 million line item for the police could stand to be re-distributed to human services that are being cut, services that do much more to keep our citizens safe -- education, health, environment. The Office of Arts, Culture and the Creative Economy (OACCE) and its budget (which represent only half of one percent of the proposed police budget) were completely eliminated.  And the reason we had asked politely for change, and why I suspect the mayor’s office repeatedly declines any motion to disinvest from the police, was not out of respect for police work, but out of fear of the police force.</p>
+
+      <p>The tide has turned and we are no longer afraid. The sense of urgency expressed over the past week in Philadelphia and across the nation prove we are unwilling to be held hostage by our fears any longer. Arts organizations will not sit passively, or ask politely, seeking scraps from the budget to support our sector. We stand with the movements for Black lives.</p>
+
+      <div class="emphasized"><p>We demand a disavowal of the murder of Black people.</p>
+        <p>We stand with the movements for Black lives and demand an end to state violence against Black and Brown people.
+      </p>
+
+      <p>We demand the Mayor and City Council acknowledge that the systemic violence against and oppression of Black people, people of color and poor people of all ethnicities comes in many forms – including the intentional deprivation of shared resources.</p>
+
+      <p>We demand the defunding and re-distribution of police funding toward human services.</p>
+
+      <p>We demand all arts and culture organizations in Philadelphia sever known ties with the police. We demand a re-imagining of safety.</p></div>
+
+      <p>Signed,</p>
+
+      <div id="names">
+        <% for (var i = 0; i < data.length; i++) { %>
+          <%= data[i].name %>, <%= data[i].org %><br>
+        <% } %>
+      </div>
+    </div>
+
+    <div id="add-your-name">
+      <h2>ENDORSE THE LETTER</h2>
+
+      <form action="/thankyou" method="POST">
+        <span class="label">Name <em>(required)</em>: </span>
+        <input type="text" name="name" value=""><br>
+        <span class="label">Arts Organization <em>(required)</em>: </span>
+        <input type="text" name="org" value=""><br>
+        <input type="submit" class="button" value="SUBMIT">
+      </form>
+    </div>
+
+    <div class="footer">
+
+    </div>
+
+
+  </body>
+
+
+</html>
