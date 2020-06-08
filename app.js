@@ -53,6 +53,6 @@ app.get('/resources', (req, res) => {
   res.render('resources');
 })
 
-app.listen(8000, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log("Example app listening on port 8000!")
 });
