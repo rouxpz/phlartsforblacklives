@@ -43,7 +43,7 @@ app.get('/', (req, res) => {
   });
 });
 
-app.post('/', (req, res) => {
+app.post('/thankyou', (req, res) => {
   db.run("CREATE TABLE IF NOT EXISTS Users (Name TEXT, Org TEXT)");
   db.run("INSERT into Users(Name,Org) VALUES (?, ?)", [req.body.name, req.body.org]);
   res.render('thankyou', {data : {name: req.body.name, org: req.body.org}});
