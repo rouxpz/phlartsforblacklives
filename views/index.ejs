@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Open Letter to Mayor Jim Kenney</title>
+    <title>PHILLY ARTS FOR BLACK LIVES</title>
      <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="img/favicon.ico" rel="icon" type="image/x-icon" />
   </head>
 
   <body>
@@ -14,6 +14,9 @@
       <a href="#add-your-name"><button type="button" name="button" class="button">ADD YOUR NAME TO THE LETTER</button></a>
       <a href="/resources"><button type="button" name="button" class="button">RESOURCES ON POLICE ABOLITION</button></a>
     </div>
+    <% if (!success) { %>
+      <div id="errorMsg">Sorry, you must fill out all required fields. Please try again.</div>
+    <% } %>
     <div id="letter">
       <h2>AN OPEN LETTER TO MAYOR KENNEY<br>& CITY COUNCIL</h2>
       <br>
@@ -51,11 +54,25 @@
 
       <p>We demand all arts and culture organizations in Philadelphia sever known ties with the police. <strong><em>We demand a re-imagining of safety.</em></strong></p></div>
 
-      <p>Signed,</p>
+      <p><strong><em>Addendum (6/9/20):</em></strong> While we are heartened to learn of the letter signed by 14 of Philadelphia's City Council members <a href="https://www.nbcphiladelphia.com/news/local/14-philadelphia-council-members-say-no-to-mayors-police-budget-increase/2424097/">calling for police reforms and opposing police budget increases</a> sent on June 8, 2020, we are steadfast in our belief that Philadelphia must further defund the Philadelphia Police Department, invest in Black and Brown communities, and will not cease our advocacy until a budget is approved that matches our values.</p><br>
 
+      <p>Signed,</p>
+      <div id="pinned" class="column">
+        Anne Ishii, Executive Director<br>
+        <em>Asian Arts Initiative</em><br><br>
+        Danny Orendorff, Executive Director<br>
+        <em>Vox Populi</em><br><br>
+        Maori Karmael Holmes, Artistic Director & CEO<br>
+        <em>BlackStar</em><br><br>
+        Louis Massiah, Founder<br>
+        <em>Scribe Video Center</em><br><br>
+      </div>
       <div id="names" class="column">
         <% for (var i = 0; i < data.length; i++) { %>
-          <%= data[i].name %>, <em><%= data[i].org %></em><br>
+          <%= data[i].name %>, <%= data[i].title %><br>
+          <% if (data[i].org != '') { %>
+            <em><%= data[i].org %></em><br><br>
+          <% } %>
         <% } %>
       </div>
     </div>
@@ -63,10 +80,12 @@
     <div id="add-your-name">
       <h2>ENDORSE THE LETTER</h2>
 
-      <form action="/thankyou" method="POST">
+      <form action="/" method="POST">
         <span class="label">Name <em>(required)</em>: </span>
         <input type="text" name="name" value=""><br>
-        <span class="label">Arts Organization <em>(required)</em>: </span>
+        <span class="label">Title <em>(required)</em>: </span>
+        <input type="text" name="title" value=""><br>
+        <span class="label">Arts Organization <em>(leave blank if none)</em>: </span>
         <input type="text" name="org" value=""><br>
         <input type="submit" class="button" value="SUBMIT">
       </form>
@@ -75,7 +94,6 @@
     <div class="footer">
 
     </div>
-
 
   </body>
 

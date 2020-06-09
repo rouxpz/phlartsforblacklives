@@ -25,7 +25,7 @@ p, li {
   background-color: #110918;
 }
 
-#names {
+#names, #pinned {
   font-size: 1.1em;
   -webkit-column-width: 400px;
       -moz-column-width: 400px;
@@ -57,11 +57,20 @@ h4 {
   text-align:left;
 }
 
-#letter, #resources, #thankyou {
+#letter, #resources, #thankyou, #enterPassword {
   padding-left:10%;
   padding-right:10%;
   padding-top: 5%;
   padding-bottom: 5%;
+}
+
+#errorMsg {
+  padding-left:10%;
+  padding-right:10%;
+  padding-top: 5%;
+  text-align: center;
+  font-size: 1.35em;
+  color:#f86eb3;
 }
 
 a {
@@ -127,7 +136,7 @@ input[type=text] {
   margin: 8px 0;
   border-radius: 4px;
   border: 1px solid;
-  font: 1em Arial, Helvetica, sans-serif;
+  font: 1em 'Karla', sans-serif;
 }
 
 input[type=submit] {
@@ -136,4 +145,8 @@ input[type=submit] {
 
 .footer {
   height:40px;
+}
+
+#adminTable {
+  padding: 20px;
 }
