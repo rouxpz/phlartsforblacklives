@@ -4,6 +4,7 @@
     <title>Open Letter to Mayor Jim Kenney</title>
     <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="shortcut icon" href="/favicon.ico">
   </head>
 
   <body>
@@ -47,11 +48,11 @@
 
       <p>We demand the defunding and re-distribution of police funding toward human services.</p>
 
-      <p>We demand all arts and culture organizations in Philadelphia sever known ties with the police. We demand a re-imagining of safety.</p></div>
+      <p>We demand all arts and culture organizations in Philadelphia sever known ties with the police. <strong><em>We demand a re-imagining of safety.</em></strong></p></div>
 
       <p>Signed,</p>
 
-      <div id="names">
+      <div id="names" class="column">
         <% for (var i = 0; i < data.length; i++) { %>
           <%= data[i].name %>, <em><%= data[i].org %></em><br>
         <% } %>

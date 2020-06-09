@@ -1,3 +1,9 @@
+@media only screen and (min-width: 641px) {
+  .column {
+    width: 100%;
+  }
+}
+
 body {
   font-family: 'Karla', sans-serif;
   /* padding:25px; */
@@ -19,9 +25,9 @@ p {
 }
 
 #names {
-  -webkit-column-count: 2;
-      -moz-column-count: 2;
-           column-count: 2;
+  -webkit-column-width: 400px;
+      -moz-column-width: 400px;
+           column-width: 400px;
 
    -webkit-column-gap: 20px;
       -moz-column-gap: 20px;
