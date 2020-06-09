@@ -78,6 +78,10 @@ a {
   text-decoration: none;
 }
 
+a:visited {
+  color:#ab5ef8;
+}
+
 a:hover {
   color:#f86eb3;
   text-decoration: line-through;
