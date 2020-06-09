@@ -58,21 +58,31 @@
 
       <p>Signed,</p>
       <div id="pinned" class="column">
-        Anne Ishii, Executive Director<br>
-        <em>Asian Arts Initiative</em><br><br>
-        Danny Orendorff, Executive Director<br>
-        <em>Vox Populi</em><br><br>
-        Maori Karmael Holmes, Artistic Director & CEO<br>
-        <em>BlackStar</em><br><br>
-        Louis Massiah, Founder<br>
-        <em>Scribe Video Center</em><br><br>
+        <div class="name">
+          Anne Ishii, Executive Director<br>
+          <em>Asian Arts Initiative</em><br><br>
+        </div>
+        <div class="name">
+          Danny Orendorff, Executive Director<br>
+          <em>Vox Populi</em><br><br>
+        </div>
+        <div class="name">
+          Maori Karmael Holmes, Artistic Director & CEO<br>
+          <em>BlackStar</em><br><br>
+        </div>
+        <div class="name">
+          Louis Massiah, Founder<br>
+          <em>Scribe Video Center</em><br><br>
+        </div>
       </div>
       <div id="names" class="column">
         <% for (var i = 0; i < data.length; i++) { %>
+          <div class="name">
           <%= data[i].name %>, <%= data[i].title %><br>
           <% if (data[i].org != '') { %>
             <em><%= data[i].org %></em><br><br>
           <% } %>
+          </div>
         <% } %>
       </div>
     </div>
