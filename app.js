@@ -1,38 +1,33 @@
 const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
+const { Client } = require('pg');
+const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
-
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:false}));
 
+const client = new Client({
+  connectionString: process.env.DATABASE_URL || 'postgres://localhost:5432/names',
+  // ssl: {
+  //   rejectUnauthorized: false
+  // }
+});
+
+client.connect();
+
 var savedPw = "n0t0zer0";
 let loggedIn = false;
-
-let db = new sqlite3.Database('./db/demo.db', (err) => {
-  if (err) {
-    return console.error(err.message);
-  }
-
-  console.log('Connected to the SQlite database.')
-});
-
-var names = [];
-
-db.serialize(function() {
-    db.run("CREATE TABLE IF NOT EXISTS Users (Id TEXT, Name TEXT, Org TEXT, Title TEXT, Status TEXT)");
-});
 
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
   loggedIn = false;
-  names = [];
-  db.each("SELECT * FROM Users WHERE Status = 'Approve'", function(err, row) {
-    names.push({name: row.Name, title: row.Title, org: row.Org});
-  }, function() {
-    console.log(names);
+  var names;
+  client.query("SELECT * FROM Users WHERE Status='Approve'", (err, result) => {
+    if (err) throw err;
+    names = result.rows;
     res.render('index', { data: names, success: true });
+    // client.end();
   });
 });
 
@@ -40,26 +35,28 @@ app.post('/', (req, res) => {
 
   if (req.body.name != '' && req.body.title != '') {
     var idToAdd = req.body.name.split(' ').join('');
-    db.run("CREATE TABLE IF NOT EXISTS Users (ID TEXT, Name TEXT, Org TEXT, Title TEXT, Status TEXT)");
-    db.run("INSERT into Users(Id,Name,Org,Title,Status) VALUES (?, ?, ?, ?, ?)", [idToAdd, req.body.name, req.body.org, req.body.title, 'TBD']);
+    // db.run("CREATE TABLE IF NOT EXISTS Users (ID TEXT, Name TEXT, Org TEXT, Title TEXT, Status TEXT)");
+    // client.connect();
+    client.query('INSERT INTO users(id,name,org,title,status) VALUES($1, $2, $3, $4, $5)', [idToAdd, req.body.name, req.body.org, req.body.title, 'TBD']);
+
     res.render('thankyou', {data : {name: req.body.name, org: req.body.org}});
   } else {
     res.render ('index', {data: names, success: false});
   }
 });
 
+
 app.get('/admin', (req, res) => {
-  console.log("Logged in: " + loggedIn);
+  // console.log("Logged in: " + loggedIn);
 
   if (loggedIn == false) {
     res.render('auth');
   } else {
-    toView = [];
-    db.each("SELECT * FROM Users WHERE Status = 'TBD'", function (err, row) {
-      toView.push({name: row.Name, org: row.Org, title: row.Title, status: row.Status, id: row.Id});
-    }, function() {
-      console.log(toView);
-      res.render('admin', {data : toView})
+    var toView;
+    client.query("SELECT * FROM users WHERE status='TBD'", (err, result) => {
+      if (err) throw err;
+      toView = result.rows;
+      res.render('admin', {data : toView});
     });
   }
 });
@@ -76,9 +73,9 @@ app.post('/admin', (req, res) => {
   } else {
     var newStatus = req.body.mod.split(' ')[0];
     var toChange = req.body.mod.split(' ').slice(1).join(' ');
-    db.run("UPDATE Users SET Status = ? WHERE Name = ?", [newStatus, toChange], function() {
-      res.redirect('back');
-    });
+
+    client.query("UPDATE users SET status = ($1) WHERE name = ($2)", [newStatus, toChange]);
+    res.redirect('back');
   }
 });
 
