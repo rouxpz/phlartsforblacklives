@@ -9,17 +9,13 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:false}));
 
 const client = new Client({
-  connectionString: process.env.DATABASE_URL || 'postgres://localhost:5432/names',
-  // ssl: {
-  //   rejectUnauthorized: false
-  // }
+  connectionString: process.env.DATABASE_URL || 'postgres://localhost:5432/names'
 });
 
 client.connect();
 
 var savedPw = "n0t0zer0";
-let loggedIn = false;
-var pwToTest;
+var pwToTest = '';
 
 io.on('connection', (socket) => {
 
@@ -29,17 +25,17 @@ io.on('connection', (socket) => {
 
   socket.on('status', (msg) => {
     if (msg == 'in admin') {
-      loggedIn = true;
+      //nothing here
     }
   });
 
   socket.on('logout', (msg) => {
-    loggedIn = false;
+    pwToTest = '';
   });
 
-  // socket.on('disconnect', () => {
-  //   loggedIn = false;
-  // });
+  socket.on('disconnect', () => {
+    //nothing here
+  });
 });
 
 app.use(express.static('public'));
@@ -69,36 +65,38 @@ app.post('/', (req, res) => {
 
 
 app.get('/admin', (req, res) => {
-  // console.log("Logged in: " + loggedIn);
+  res.render('auth');
+});
 
-  if (loggedIn == false) {
-    res.render('auth');
+app.post('/admin', (req, res) => {
+  if (pwToTest == savedPw) {
+    res.redirect('/authorized');
   } else {
+    res.render('auth');
+  }
+});
+
+app.get('/authorized', (req, res) => {
+  if (pwToTest == savedPw) {
+    pwToTest = '';
     var toView;
     client.query("SELECT * FROM users WHERE status='TBD'", (err, result) => {
       if (err) throw err;
       toView = result.rows;
       res.render('admin', {data : toView});
     });
+  } else {
+    res.redirect('/admin');
   }
 });
 
-app.post('/admin', (req, res) => {
-  console.log(loggedIn);
-  if (loggedIn == false) {
-    if (pwToTest == savedPw) {
-      loggedIn = true;
-      res.redirect('/admin')
-    } else {
-      res.render('auth');
-    }
-  } else {
-    var newStatus = req.body.mod.split(' ')[0];
-    var toChange = req.body.mod.split(' ').slice(1).join(' ');
+app.post('/authorized', (req, res) => {
+  pwToTest = savedPw;
+  var newStatus = req.body.mod.split(' ')[0];
+  var toChange = req.body.mod.split(' ').slice(1).join(' ');
 
-    client.query("UPDATE users SET status = ($1) WHERE name = ($2)", [newStatus, toChange]);
-    res.redirect('back');
-  }
+  client.query("UPDATE users SET status = ($1) WHERE name = ($2)", [newStatus, toChange]);
+  res.redirect('/authorized');
 });
 
 app.get('/resources', (req, res) => {
@@ -106,5 +104,5 @@ app.get('/resources', (req, res) => {
 });
 
 http.listen(process.env.PORT || 5000, () => {
-  console.log("Example app listening on port 8000!")
+  console.log("App listening on port!")
 });

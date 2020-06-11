@@ -23,7 +23,7 @@
           <td><%= data[i].title %></td>
           <td><%= data[i].org %></td>
           <td>
-            <form action="/admin" method="post">
+            <form action="/authorized" method="post">
               <input type="submit" name="mod" value="Approve <%= data[i].name %>">
               <input type="submit" name="mod" value="Decline <%= data[i].name %>">
             </form>
@@ -39,7 +39,7 @@
       $(function () {
         var socket = io();
         $(document).ready(function(e) {
-          socket.emit('status', 'in admin');
+          socket.emit('status', {view : 'auth.ejs'});
         });
         $('#logout').click(function(e) {
           socket.emit('logout', '');
