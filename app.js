@@ -2,6 +2,8 @@ const express = require('express');
 const { Client } = require('pg');
 const path = require('path');
 const app = express();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
 const bodyParser = require('body-parser');
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:false}));
@@ -17,11 +19,26 @@ client.connect();
 
 var savedPw = "n0t0zer0";
 let loggedIn = false;
+var pwToTest;
+
+io.on('connection', (socket) => {
+
+  socket.on('password', (msg) => {
+    pwToTest = msg;
+  });
+
+  socket.on('logout', (msg) => {
+    loggedIn = false;
+  });
+
+  socket.on('disconnect', () => {
+    loggedIn = false;
+  });
+});
 
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  loggedIn = false;
   var names;
   client.query("SELECT * FROM Users WHERE Status='Approve'", (err, result) => {
     if (err) throw err;
@@ -32,7 +49,6 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-
   if (req.body.name != '' && req.body.title != '') {
     var idToAdd = req.body.name.split(' ').join('');
     // db.run("CREATE TABLE IF NOT EXISTS Users (ID TEXT, Name TEXT, Org TEXT, Title TEXT, Status TEXT)");
@@ -62,9 +78,8 @@ app.get('/admin', (req, res) => {
 });
 
 app.post('/admin', (req, res) => {
-
   if (loggedIn == false) {
-    if (req.body.pw == savedPw) {
+    if (pwToTest == savedPw) {
       loggedIn = true;
       res.redirect('/admin')
     } else {
@@ -83,6 +98,6 @@ app.get('/resources', (req, res) => {
   res.render('resources');
 });
 
-app.listen(process.env.PORT || 5000, () => {
+http.listen(process.env.PORT || 5000, () => {
   console.log("Example app listening on port 8000!")
 });
