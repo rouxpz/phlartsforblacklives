@@ -38,6 +38,9 @@
     <script>
       $(function () {
         var socket = io();
+        $(document).ready(function(e) {
+          socket.emit('status', 'in admin');
+        });
         $('#logout').click(function(e) {
           socket.emit('logout', '');
         });

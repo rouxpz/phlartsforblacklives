@@ -27,13 +27,19 @@ io.on('connection', (socket) => {
     pwToTest = msg;
   });
 
+  socket.on('status', (msg) => {
+    if (msg == 'in admin') {
+      loggedIn = true;
+    }
+  });
+
   socket.on('logout', (msg) => {
     loggedIn = false;
   });
 
-  socket.on('disconnect', () => {
-    loggedIn = false;
-  });
+  // socket.on('disconnect', () => {
+  //   loggedIn = false;
+  // });
 });
 
 app.use(express.static('public'));
@@ -78,6 +84,7 @@ app.get('/admin', (req, res) => {
 });
 
 app.post('/admin', (req, res) => {
+  console.log(loggedIn);
   if (loggedIn == false) {
     if (pwToTest == savedPw) {
       loggedIn = true;
