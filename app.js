@@ -9,12 +9,12 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:false}));
 
 const client = new Client({
-  connectionString: process.env.DATABASE_URL || 'postgres://localhost:5432/names'
+  connectionString: process.env.DATABASE_URL || 'YOUR LOCAL SERVER'
 });
 
 client.connect();
 
-var savedPw = "n0t0zer0arts";
+var savedPw = "YOUR PASSWORD";
 var pwToTest = '';
 
 io.on('connection', (socket) => {
