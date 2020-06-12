@@ -118,6 +118,7 @@ a:hover {
   border: none;
   color: white;
   padding: 15px 32px;
+  font: 1em 'Karla', sans-serif;
   text-align: center;
   text-decoration: none;
   display: inline-block;

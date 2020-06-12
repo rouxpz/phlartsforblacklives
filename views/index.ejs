@@ -103,12 +103,20 @@
         <span class="label">Arts Organization <em>(leave blank if none)</em>: </span>
         <input type="text" name="org" value=""><br>
         <input type="submit" class="button" value="SUBMIT">
-      </form>
+      </form><br>
+      <a href='javascript:void(0)' onclick="scrollToTop();"><em>BACK TO TOP</em></a>
     </div>
 
     <div class="footer">
 
     </div>
+
+    <script type="text/javascript">
+      function scrollToTop() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+      }
+    </script>
 
   </body>
 
