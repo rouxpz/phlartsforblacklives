@@ -78,7 +78,7 @@
         <% var titlesToStrip = ['mr.', 'ms.', 'mx', 'mx.', 'dr', 'dr.', 'mrs.', 'miss', 'miss.', 'mr', 'ms', 'mrs', ' ']; %>
         <% for (var i = 0; i < data.length; i++) { %>
           <div class="name">
-            <% if (titlesToStrip.includes(data[i].title.toLowerCase()) == true) { %>
+            <% if (titlesToStrip.includes(data[i].title.trim().toLowerCase()) == true) { %>
               <%= data[i].name %><br>
             <% } else { %>
               <%= data[i].name %>, <%= data[i].title %><br>
