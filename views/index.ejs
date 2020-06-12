@@ -75,7 +75,7 @@
         </div>
       </div>
       <div id="names" class="column">
-        <% var titlesToStrip = ['mr.', 'ms.', 'mx', 'mx.', 'mrs.', 'miss', 'miss.', 'mr', 'ms', 'mrs', ' ']; %>
+        <% var titlesToStrip = ['mr.', 'ms.', 'mx', 'mx.', 'dr', 'dr.', 'mrs.', 'miss', 'miss.', 'mr', 'ms', 'mrs', ' ']; %>
         <% for (var i = 0; i < data.length; i++) { %>
           <div class="name">
             <% if (titlesToStrip.includes(data[i].title.toLowerCase()) == true) { %>
